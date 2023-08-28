@@ -7,6 +7,7 @@ import {
   CTableBody,
   CTableDataCell,
 } from '@coreui/react'
+import { NavLink } from 'react-router-dom'
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([])
@@ -27,7 +28,7 @@ const ContactList = () => {
 
   return (
     <>
-      <CTable>
+      <CTable style={{margin: '30px 0px 0px 0px'}}>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -50,10 +51,10 @@ const ContactList = () => {
                 <CTableDataCell>{contact.phone}</CTableDataCell>
                 <CTableDataCell>{contact.message}</CTableDataCell>
                 <CTableDataCell>
-                  <button onClick={editDataHandler}>Update</button>
+                  <NavLink to={`/contacts/edit/` + contact.id} onClick={editDataHandler}>Update</NavLink>
                 </CTableDataCell>
                 <CTableDataCell>
-                  <button onClick={deleteDataHandler}>Delete</button>
+                  <NavLink to='/' onClick={deleteDataHandler}>Delete</NavLink>
                 </CTableDataCell>
               </CTableRow>
             )

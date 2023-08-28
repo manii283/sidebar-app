@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import ContactList from "./contacts/ContactList";
 import AddContact from "./contacts/AddContact";
+import EditContact from "./contacts/EditContact";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route exact path="/contacts" element={<ContactList />} />
             <Route exact path="/add" element={<AddContact />} />
+            <Route exact path="contacts/edit/:id" element={<EditContact />} />
           </Routes>
         </div>
       </div>

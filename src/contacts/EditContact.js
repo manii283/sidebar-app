@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CCol, CFormInput, CForm, CButton } from '@coreui/react'
 
-const AddContact = () => {
+const EditContact = () => {
   // const [contact, setContact] = useState({})
   const [name, setName] = useState({})
   const [email, setEmail] = useState({})
@@ -65,11 +65,11 @@ const AddContact = () => {
           />
         </CCol>
         <CCol md={12}>
-          <CButton type="submit" name="submit"> Submit </CButton>
+          <CButton type="submit" name="submit"> Update </CButton>
         </CCol>
       </CForm>
     </>
   )
 }
 
-export default AddContact
+export default EditContact
