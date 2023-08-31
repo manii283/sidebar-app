@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CCol, CFormInput, CForm, CButton } from "@coreui/react";
 
 const EditContact = () => {
@@ -7,20 +8,23 @@ const EditContact = () => {
   const [email, setEmail] = useState({});
   const [phone, setPhone] = useState({});
   const [message, setMessage] = useState({});
-  const [id, setId] = useState();
+  // const [id, setId] = useState();
 
   const [contact, setContact] = useState("");
+
+  const { id } = useParams();
+
 
   useEffect(() => {
     loadContactDetail();
   }, []);
 
   const loadContactDetail = async () => {
-    const response = await fetch('http://localhost:3000/contacts/view/2')
+    const response = await fetch('http://localhost:3000/contacts/view/'+id)
     const resData = await response.json()
     console.log(resData)
     setContact(resData)
-    setId(resData.id)
+    // setId(resData.id)
     setName(resData.name);
     setEmail(resData.email);
     setPhone(resData.phone);
