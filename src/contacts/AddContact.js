@@ -13,11 +13,11 @@ const AddContact = () => {
 
     const requestOptions = {
       method: 'POST',
-      // headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email, phone: phone, message: message }),
     }
 
-    const response = await fetch('http://localhost:8000/contacts', requestOptions)
+    const response = await fetch('http://localhost:3000/contacts', requestOptions)
     const resData = await response.json()
     console.log(resData)
     // setContacts(resData)
