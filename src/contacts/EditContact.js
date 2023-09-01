@@ -11,44 +11,40 @@ const EditContact = () => {
   // const [id, setId] = useState();
 
   const [contact, setContact] = useState("");
-
   const { id } = useParams();
-
 
   useEffect(() => {
     loadContactDetail();
   }, []);
 
   const loadContactDetail = async () => {
-    const response = await fetch('http://localhost:3000/contacts/view/'+id)
-    const resData = await response.json()
-    console.log(resData)
-    setContact(resData)
+    const response = await fetch("http://localhost:3000/contacts/view/" + id);
+    const resData = await response.json();
+    console.log(resData);
+    setContact(resData);
     // setId(resData.id)
     setName(resData.name);
     setEmail(resData.email);
     setPhone(resData.phone);
     setMessage(resData.message);
-
-
-    };
+  };
 
   const uploadContactDetails = async (event) => {
     event.preventDefault();
 
     const requestOptions = {
       method: "POST",
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: name,
         email: email,
         phone: phone,
         message: message,
-        id: id
+        id: id,
       }),
     };
 
-    const response = await fetch("http://localhost:3000/contacts/edit", requestOptions);
+    const response = await fetch("http://localhost:3000/contacts/edit",requestOptions);
     const resData = await response.json();
     console.log(resData);
     // setContacts(resData)

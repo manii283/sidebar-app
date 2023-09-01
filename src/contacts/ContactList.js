@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom'
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([])
+  // const [rows, setRow] = useState([]);
 
   useEffect(() => {
     loadContactsFromServer()
@@ -23,8 +24,12 @@ const ContactList = () => {
     setContacts(resData)
   }
 
-  const editDataHandler = () => {}
-  const deleteDataHandler = () => {}
+  const deleteDataHandler = (index) => {
+    const dataRow = [...contacts];
+    dataRow.splice(index, 1);
+    setContacts(dataRow);
+    localStorage.removeItem("id")
+  }
 
   return (
     <>
@@ -42,7 +47,7 @@ const ContactList = () => {
         </CTableHead>
 
         <CTableBody>
-          {contacts.map((contact) => {
+          {contacts.map((contact, index) => {
             return (
               <CTableRow key={contact.id}>
                 <CTableHeaderCell scope="row">{contact.id}</CTableHeaderCell>
@@ -51,10 +56,10 @@ const ContactList = () => {
                 <CTableDataCell>{contact.phone}</CTableDataCell>
                 <CTableDataCell>{contact.message}</CTableDataCell>
                 <CTableDataCell>
-                  <NavLink to={`/contacts/edit/` + contact.id} onClick={editDataHandler}>Update</NavLink>
+                  <NavLink to={`/contacts/edit/` + contact.id}>Update</NavLink>
                 </CTableDataCell>
                 <CTableDataCell>
-                  <NavLink to='/' onClick={deleteDataHandler}>Delete</NavLink>
+                  <NavLink to={`/contacts/delete/` + contact.id} onClick={() => deleteDataHandler(index)}>Delete</NavLink>
                 </CTableDataCell>
               </CTableRow>
             )

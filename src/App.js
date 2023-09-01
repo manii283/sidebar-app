@@ -18,6 +18,7 @@ function App() {
             <Route exact path="/contacts" element={<ContactList />} />
             <Route exact path="/add" element={<AddContact />} />
             <Route exact path="contacts/edit/:id" element={<EditContact />} />
+            <Route exact path="contacts/delete/:id" element={<ContactList />} />
           </Routes>
         </div>
       </div>
