@@ -7,6 +7,7 @@ import {
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
+  CButton
 } from "@coreui/react";
 
 const ContactList = () => {
@@ -42,7 +43,9 @@ const ContactList = () => {
 
   return (
     <>
-      <CTable style={{ margin: "30px 0px 0px 0px" }}>
+    <h2 style={{ margin: "30px 0px 0px 0px" }}>Contact LIst</h2>
+   <NavLink to={`/contacts/add`}>  <CButton style={{ margin: "0px 20px 0px 0px", float: 'right'}}>Add New</CButton></NavLink>
+      <CTable style={{ margin: "60px 0px 0px 0px" }}>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
