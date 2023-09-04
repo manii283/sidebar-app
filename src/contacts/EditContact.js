@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { CCol, CFormInput, CForm, CButton } from "@coreui/react";
 
 const EditContact = () => {
@@ -44,7 +44,10 @@ const EditContact = () => {
       }),
     };
 
-    const response = await fetch("http://localhost:3000/contacts/edit",requestOptions);
+    const response = await fetch(
+      "http://localhost:3000/contacts/edit",
+      requestOptions
+    );
     const resData = await response.json();
     console.log(resData);
     // setContacts(resData)
@@ -101,9 +104,11 @@ const EditContact = () => {
           />
         </CCol>
         <CCol md={12}>
-          <CButton type="submit" name="submit">
-            Update
-          </CButton>
+          {/* <NavLink to="/contacts"> */}
+            <CButton type="submit" name="submit">
+              Update
+            </CButton>
+          {/* </NavLink> */}
         </CCol>
       </CForm>
     </>

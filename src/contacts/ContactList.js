@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import {
   CTable,
   CTableHead,
@@ -6,34 +7,42 @@ import {
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
-} from '@coreui/react'
-import { NavLink } from 'react-router-dom'
+} from "@coreui/react";
 
 const ContactList = () => {
-  const [contacts, setContacts] = useState([])
-  // const [rows, setRow] = useState([]);
+  const [contacts, setContacts] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
-    loadContactsFromServer()
-  }, [])
+    loadContactsFromServer();
+  }, []);
 
   const loadContactsFromServer = async () => {
-    const response = await fetch('http://localhost:3000/contacts')
-    const resData = await response.json()
-    console.log(resData)
-    setContacts(resData)
-  }
+    const response = await fetch("http://localhost:3000/contacts");
+    const resData = await response.json();
+    console.log(resData);
+    setContacts(resData);
+  };
 
-  const deleteDataHandler = (index) => {
+  const deleteDataHandler = async(index) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({ name: name, email: email, phone: phone, message: message }),
+    };
+
+    const response = await fetch("http://localhost:3000/contacts/delete/" + id,requestOptions);
+    const resData = await response.json();
+    console.log(resData, "delete");
+
     const dataRow = [...contacts];
     dataRow.splice(index, 1);
     setContacts(dataRow);
-    localStorage.removeItem("id")
-  }
+  };
 
   return (
     <>
-      <CTable style={{margin: '30px 0px 0px 0px'}}>
+      <CTable style={{ margin: "30px 0px 0px 0px" }}>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -41,7 +50,7 @@ const ContactList = () => {
             <CTableHeaderCell scope="col">Email</CTableHeaderCell>
             <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
             <CTableHeaderCell scope="col">Message</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Updaye</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Update</CTableHeaderCell>
             <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -62,12 +71,12 @@ const ContactList = () => {
                   <NavLink to={`/contacts/delete/` + contact.id} onClick={() => deleteDataHandler(index)}>Delete</NavLink>
                 </CTableDataCell>
               </CTableRow>
-            )
+            );
           })}
         </CTableBody>
       </CTable>
     </>
-  )
-}
+  );
+};
 
-export default ContactList
+export default ContactList;
